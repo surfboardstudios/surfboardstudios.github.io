@@ -51,6 +51,25 @@
             font-size: 24px;
             text-align: center;
         }
+        #accessPopup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        #accessPopupContent {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 20px;
+            width: 50%;
+            text-align: center;
+        }
+        #accessInput {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +96,18 @@
 <footer>
     <p>&copy; 2024 Surfboard Studios. All rights reserved.</p>
 </footer>
+
+<!-- Access Code Popup -->
+<div id="accessPopup">
+    <div id="accessPopupContent">
+        <h2>Enter Access Code</h2>
+        <input type="password" id="accessInput" placeholder="Access Code"><br>
+        <button onclick="checkAccess()">Submit</button>
+    </div>
+</div>
+
+<!-- Button to Activate Access Code Popup -->
+<button onclick="showAccessPopup()">Activate Access Code Popup</button>
 
 <script>
     // Set the launch date
@@ -107,6 +138,25 @@
             document.getElementById("countdownTimer").innerHTML = "EXPIRED";
         }
     }, 1000);
+
+    function showAccessPopup() {
+        document.getElementById("accessPopup").style.display = "block";
+    }
+
+    function checkAccess() {
+        let accessCode = document.getElementById("accessInput").value;
+        if (accessCode === "1234") {
+            // Code is correct, allow changing the launch date
+            let newDate = prompt("Enter the new launch date (YYYY-MM-DD HH:MM:SS):");
+            if (newDate) {
+                launchDate = new Date(newDate).getTime();
+                alert("Launch date updated successfully!");
+                document.getElementById("accessPopup").style.display = "none";
+            }
+        } else {
+            alert("Access Denied! Invalid access code.");
+        }
+    }
 </script>
 
 </body>
