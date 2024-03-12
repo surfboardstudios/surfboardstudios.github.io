@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surfboard Studios - Game Studio</title>
+    <title>Surfboard Studios - Countdown</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,6 +47,10 @@
             text-align: center;
             padding: 20px;
         }
+        #countdown {
+            font-size: 24px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -64,38 +68,46 @@
 </nav>
 
 <div class="container">
-    <section>
-        <h2>Welcome to Surfboard Studios</h2>
-        <p>Surfboard Studios is a leading game development studio dedicated to crafting unforgettable gaming experiences. With a team of passionate developers, designers, and artists, we strive to push the boundaries of creativity and innovation in the gaming industry.</p>
-        <p>Explore our website to discover our latest games, learn more about our studio, and get in touch with us.</p>
-    </section>
-    
-    <section>
-        <h2>Our Games</h2>
-        <p>Check out some of our popular games:</p>
-        <ul>
-            <li>Game 1</li>
-            <li>Game 2</li>
-            <li>Game 3</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>About Surfboard Studios</h2>
-        <p>Founded in [Year], Surfboard Studios has quickly gained recognition for its commitment to excellence and creativity. Our team consists of industry veterans and rising talents, all united by a passion for gaming.</p>
-    </section>
-
-    <section>
-        <h2>Contact Us</h2>
-        <p>Have questions or inquiries? Feel free to reach out to us:</p>
-        <p>Email: info@surfboardstudios.com</p>
-        <p>Phone: [Phone Number]</p>
+    <section id="countdown">
+        <h2>Countdown to Launch</h2>
+        <div id="countdownTimer"></div>
     </section>
 </div>
 
 <footer>
     <p>&copy; 2024 Surfboard Studios. All rights reserved.</p>
 </footer>
+
+<script>
+    // Set the launch date
+    let launchDate = new Date('March 20, 2024 00:00:00').getTime();
+
+    // Update the countdown every second
+    let x = setInterval(function() {
+
+        // Get the current date and time
+        let now = new Date().getTime();
+
+        // Calculate the time remaining
+        let distance = launchDate - now;
+
+        // Calculate days, hours, minutes, and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        document.getElementById("countdownTimer").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+        // If the countdown is over, display a message
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdownTimer").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>
